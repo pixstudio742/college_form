@@ -1,4 +1,53 @@
+<?php
+ include "database.php";
+?>
 
+<?php
+if(isset($_POST['submit'])){
+    $name = ($_POST['name']);
+    $email = ($_POST['email']);
+    $phone = ($_POST['phone']);
+    $semester = ($_POST['semester']);
+
+    $image= $_FILES["image"]["name"];
+
+    $tempname= $_FILES["image"]["tmp_name"];
+    $folder = "images/".$image;
+    $image_move = move_uploaded_file($tempname, $folder);
+
+    $url = ($_POST['url']);
+    $confirm = ($_POST['confirm']);
+
+$query =mysqli_query($conn,"insert into form(name,email,phone,semester,image,url,confirm) values('$name',' $email','$phone','$semester','$image','$url','$confirm')");
+
+
+if ( $query) {
+
+    ?>
+       <script>
+          alert("Successfully Register");
+       </script>
+     <?php 
+  
+    
+  
+    }
+    else{
+  
+      ?>
+      <script>
+         alert("Unsuccessful");
+      </script>
+    <?php 
+  
+    }
+  
+  
+    
+  
+   }
+
+?>
 
 
 
@@ -107,55 +156,7 @@
     </form>
    </div> 
 </div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
 </body>
 </html>
-<?php
- include "database.php";
-?>
-
-<?php
-if(isset($_POST['submit'])){
-    $name = ($_POST['name']);
-    $email = ($_POST['email']);
-    $phone = ($_POST['phone']);
-    $semester = ($_POST['semester']);
-
-    $image= $_FILES["image"]["name"];
-
-    $tempname= $_FILES["image"]["tmp_name"];
-    $folder = "images/".$image;
-    $image_move = move_uploaded_file($tempname, $folder);
-
-    $url = ($_POST['url']);
-    $confirm = ($_POST['confirm']);
-
-$query =mysqli_query($conn,"insert into form(name,email,phone,semester,image,url,confirm) values('$name',' $email','$phone','$semester','$image','$url','$confirm')");
-
-
-if ( $query) {
-
-    ?>
-       <script>
-          alert("Successfully Register");
-       </script>
-     <?php 
-  
-    
-  
-    }
-    else{
-  
-      ?>
-      <script>
-         alert("Unsuccessful");
-      </script>
-    <?php 
-  
-    }
-  
-  
-    
-  
-   }
-
-?>
